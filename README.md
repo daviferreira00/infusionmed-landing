@@ -17,8 +17,9 @@ Depois abra http://localhost:5173 (site principal) ou http://localhost:5173/expe
 - `index.html`: página única com todas as seções
 - `experience/index.html`: segunda landing page (rota de teste) no estilo das páginas de lançamento da Apple, com cenas fixas dirigidas pelo scroll; usa `assets/css/experience.css` e `assets/js/experience.js`
 - `assets/css/style.css`: estilos e animações
-- `assets/js/main.js`: menu, links de WhatsApp, carrossel de convênios e formulário
+- `assets/js/main.js`: menu, links de WhatsApp, carrosséis (convênios e fotos da estrutura) e modal de fotos
 - `assets/img/`: logo, fotos da clínica, ícones e logos dos convênios
+- `assets/img/estrutura/`: fotos da galeria "Conheça nossos espaços" (versões reduzidas para 1800px)
 
 ## Configuração
 

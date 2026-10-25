@@ -19,6 +19,7 @@ document.querySelectorAll('.marquee__track').forEach((track) => {
   [...track.children].forEach((item) => {
     const clone = item.cloneNode(true);
     clone.setAttribute('aria-hidden', 'true');
+    clone.querySelectorAll('button, a').forEach((el) => el.setAttribute('tabindex', '-1'));
     track.appendChild(clone);
   });
 });
@@ -68,28 +69,42 @@ if ('IntersectionObserver' in window) {
   document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
 }
 
-// Contact form -> WhatsApp with the message filled in
-const form = document.getElementById('contact-form');
-const formError = form.querySelector('.form__error');
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const data = Object.fromEntries(new FormData(form));
-  const missing = ['nome', 'telefone'].filter((k) => !data[k].trim());
-  form.querySelectorAll('input').forEach((input) => input.setAttribute('aria-invalid', String(missing.includes(input.name))));
-  formError.hidden = missing.length === 0;
-  if (missing.length) {
-    form.querySelector(`[name="${missing[0]}"]`).focus();
-    return;
-  }
-  const lines = [
-    'Olá! Vim pelo site da InfusionMed.',
-    `Nome: ${data.nome.trim()}`,
-    `Telefone: ${data.telefone.trim()}`,
-    `Tratamento de interesse: ${data.tratamento}`,
-  ];
-  if (data.mensagem.trim()) lines.push(`Mensagem: ${data.mensagem.trim()}`);
-  window.open(whatsappUrl(lines.join('\n')), '_blank', 'noopener');
-});
+// Structure photos: open the clicked photo in a modal and browse with buttons/arrow keys
+const lightbox = document.querySelector('.lightbox');
+const photoButtons = [...document.querySelectorAll('.photo-card:not([aria-hidden="true"] .photo-card)')];
+if (lightbox && photoButtons.length) {
+  const lbImg = lightbox.querySelector('img');
+  const lbCaption = lightbox.querySelector('.lightbox__caption');
+  const lbCount = lightbox.querySelector('.lightbox__count');
+  let current = 0;
+  let opener = null;
+
+  const show = (i) => {
+    current = (i + photoButtons.length) % photoButtons.length;
+    const img = photoButtons[current].querySelector('img');
+    lbImg.src = img.currentSrc || img.src;
+    lbImg.alt = img.alt;
+    lbCaption.textContent = photoButtons[current].querySelector('span').textContent;
+    lbCount.textContent = `${current + 1} / ${photoButtons.length}`;
+  };
+
+  document.querySelectorAll('.photo-card').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      opener = btn;
+      show(Number(btn.dataset.photo));
+      lightbox.showModal();
+    });
+  });
+  lightbox.querySelector('.lightbox__prev').addEventListener('click', () => show(current - 1));
+  lightbox.querySelector('.lightbox__next').addEventListener('click', () => show(current + 1));
+  lightbox.querySelector('.lightbox__close').addEventListener('click', () => lightbox.close());
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.close(); });
+  lightbox.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+  });
+  lightbox.addEventListener('close', () => opener?.focus({ preventScroll: true }));
+}
 
 // Footer year
 document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
