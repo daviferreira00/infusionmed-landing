@@ -1,6 +1,6 @@
 // InfusionMed — landing page interactions
 
-const WHATSAPP_NUMBER = '5583981947777';
+const WHATSAPP_NUMBER = '5583981919999';
 const DEFAULT_MESSAGE = 'Olá! Gostaria de agendar um atendimento na InfusionMed.';
 
 const whatsappUrl = (text) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
@@ -84,7 +84,7 @@ if (lightbox && photoButtons.length) {
     const img = photoButtons[current].querySelector('img');
     lbImg.src = img.currentSrc || img.src;
     lbImg.alt = img.alt;
-    lbCaption.textContent = photoButtons[current].querySelector('span').textContent;
+    lbCaption.textContent = photoButtons[current].dataset.label;
     lbCount.textContent = `${current + 1} / ${photoButtons.length}`;
   };
 

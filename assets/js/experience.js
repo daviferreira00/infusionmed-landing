@@ -1,7 +1,7 @@
 // InfusionMed — Experiência (rota /experience)
 // Motor de scroll: cada [data-scene] recebe --p (0 → 1) suavizado; o CSS faz o resto.
 
-const WHATSAPP_NUMBER = '5583981947777';
+const WHATSAPP_NUMBER = '5583981919999';
 const DEFAULT_MESSAGE = 'Olá! Gostaria de agendar um atendimento na InfusionMed.';
 const whatsappUrl = (text) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 
