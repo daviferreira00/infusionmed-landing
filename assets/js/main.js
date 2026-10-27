@@ -7,6 +7,33 @@ const whatsappUrl = (text) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURI
 
 document.documentElement.classList.add('js');
 
+// Campanhas de conscientização: laço discreto ao lado do logo no mês da campanha.
+// Para pré-visualizar outro mês: ?mes=11
+const CAMPAIGNS = {
+  1: { name: 'Janeiro Branco', cause: 'Cuidado com a saúde mental e emocional.', color: '#8496A8', outline: true },
+  2: { name: 'Fevereiro Roxo', cause: 'Conscientização sobre lúpus, fibromialgia e Alzheimer.', color: '#7B3FA0' },
+  3: { name: 'Março Lilás', cause: 'Prevenção do câncer do colo do útero.', color: '#B07CD8' },
+  4: { name: 'Abril Azul', cause: 'Conscientização sobre o autismo.', color: '#3A8DDE' },
+  5: { name: 'Maio Roxo', cause: 'Conscientização sobre as doenças inflamatórias intestinais.', color: '#6A2C91' },
+  6: { name: 'Junho Vermelho', cause: 'Incentivo à doação de sangue.', color: '#D6303A' },
+  7: { name: 'Julho Verde', cause: 'Prevenção do câncer de cabeça e pescoço.', color: '#2E9E5B' },
+  8: { name: 'Agosto Branco', cause: 'Prevenção do câncer de pulmão.', color: '#8496A8', outline: true },
+  9: { name: 'Setembro Amarelo', cause: 'Valorização da vida e prevenção do suicídio.', color: '#DDA20A' },
+  10: { name: 'Outubro Rosa', cause: 'Prevenção e diagnóstico precoce do câncer de mama.', color: '#E0609A' },
+  11: { name: 'Novembro Azul', cause: 'Saúde do homem e prevenção do câncer de próstata.', color: '#2F7FD6' },
+  12: { name: 'Dezembro Vermelho', cause: 'Prevenção do HIV/aids e de outras ISTs.', color: '#C8102E' },
+};
+const campaignEl = document.querySelector('.campaign');
+const campaignMonth = Number(new URLSearchParams(location.search).get('mes')) || new Date().getMonth() + 1;
+const campaign = CAMPAIGNS[campaignMonth];
+if (campaignEl && campaign) {
+  campaignEl.style.setProperty('--campaign-color', campaign.color);
+  campaignEl.classList.toggle('campaign--outline', Boolean(campaign.outline));
+  campaignEl.setAttribute('aria-label', `${campaign.name}: ${campaign.cause}`);
+  campaignEl.querySelector('.campaign__tip').innerHTML = `<strong>${campaign.name}</strong><br>${campaign.cause}`;
+  campaignEl.hidden = false;
+}
+
 // WhatsApp links
 document.querySelectorAll('[data-whatsapp]').forEach((el) => {
   el.href = whatsappUrl(el.dataset.msg || DEFAULT_MESSAGE);

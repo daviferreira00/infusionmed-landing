@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aleo:wght@500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=9">
+  <link rel="stylesheet" href="assets/css/style.css?v=10">
 </head>
 <body>
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
@@ -22,9 +22,15 @@
   <!-- Cabeçalho -->
   <header class="header" id="topo">
     <div class="container header__inner">
-      <a href="#topo" class="header__logo" aria-label="InfusionMed, voltar ao início">
-        <img src="assets/img/logo.png" alt="InfusionMed" width="200" height="54">
-      </a>
+      <div class="header__brand">
+        <a href="#topo" class="header__logo" aria-label="InfusionMed, voltar ao início">
+          <img src="assets/img/logo.png" alt="InfusionMed" width="200" height="54">
+        </a>
+        <span class="campaign" tabindex="0" hidden>
+          <svg class="campaign__ribbon" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2.5c-2 0-3.5 1.6-3.5 3.6 0 1.4.7 2.8 1.6 4.3L5 19.5l2.4 1.8 4.6-7.4 4.6 7.4 2.4-1.8-5.1-9.1c.9-1.5 1.6-2.9 1.6-4.3 0-2-1.5-3.6-3.5-3.6zm0 2.2c.8 0 1.4.6 1.4 1.5 0 .8-.5 1.9-1.4 3.3-.9-1.4-1.4-2.5-1.4-3.3 0-.9.6-1.5 1.4-1.5z"/></svg>
+          <span class="campaign__tip" role="tooltip"></span>
+        </span>
+      </div>
       <nav class="nav" id="nav" aria-label="Navegação principal">
         <a href="#sobre">Quem somos</a>
         <a href="#tratamentos">Tratamentos</a>
@@ -408,6 +414,6 @@
     <svg class="icon"><use href="assets/img/icons.svg#i-chat"/></svg>
   </a>
 
-  <script src="assets/js/main.js?v=4" defer></script>
+  <script src="assets/js/main.js?v=5" defer></script>
 </body>
 </html>

@@ -88,6 +88,23 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .header.is-scrolled { background: rgba(255,255,255,.95); box-shadow: 0 6px 24px -14px rgba(20,58,88,.35); }
 .header__inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .header__logo img { width: 180px; height: auto; }
+.header__brand { display: flex; align-items: center; gap: 14px; }
+
+/* Campanhas de conscientização (ativadas pelo mês em main.js) */
+.campaign { position: relative; display: inline-flex; padding: 6px 0 6px 14px; border-left: 1px solid var(--line); color: var(--campaign-color, var(--blue)); cursor: help; outline: none; }
+.campaign[hidden] { display: none; }
+.campaign__ribbon { width: 26px; height: 26px; fill: currentColor; }
+.campaign--outline .campaign__ribbon { fill: #fff; stroke: currentColor; stroke-width: 1.2; }
+.campaign__tip {
+  position: absolute; top: calc(100% + 8px); left: 14px; transform: translateX(-35%);
+  width: max-content; max-width: 240px; padding: 8px 12px; border-radius: var(--radius-sm);
+  background: #fff; box-shadow: var(--shadow-sm); border-top: 3px solid currentColor;
+  color: var(--ink); font-size: .8rem; line-height: 1.4;
+  opacity: 0; visibility: hidden; transition: opacity .2s ease, visibility .2s ease;
+}
+.campaign__tip strong { color: var(--campaign-color); }
+.campaign:hover .campaign__tip, .campaign:focus .campaign__tip { opacity: 1; visibility: visible; }
+.campaign:focus-visible .campaign__ribbon { outline: 2px solid currentColor; outline-offset: 3px; border-radius: 4px; }
 .nav { display: flex; align-items: center; gap: 28px; }
 .nav a:not(.btn) { text-decoration: none; font-weight: 500; font-size: .95rem; color: var(--ink); position: relative; padding: 6px 0; }
 .nav a:not(.btn)::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--gradient); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
